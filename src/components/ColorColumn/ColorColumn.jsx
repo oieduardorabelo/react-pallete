@@ -41,6 +41,16 @@ class ColorColumn extends React.Component {
     return (
       <div data-id={name} style={columnStyles} onClick={this.onClickTogglePanel}>
 
+        <button
+          data-id="drag-me"
+          style={styles.buttonDragMe()}
+          type="button"
+        >
+          <span style={styles.buttonDragMeBar({ marginBottom: 4 })}></span>
+          <span style={styles.buttonDragMeBar()}></span>
+          Drag Me!
+        </button>
+
         <span style={styles.label()}>{columnStyles.backgroundColor}</span>
 
         <div style={panelOverlayStyles} onClick={this.onClickTogglePanel} />

@@ -1,3 +1,5 @@
+import { mix } from '../../domain';
+
 const ColorColumnStyles = {
   row() {
     return {
@@ -6,14 +8,14 @@ const ColorColumnStyles = {
       flexGrow: 1,
       height: '100%',
       justifyContent: 'center',
+      position: 'relative',
     }
   },
   label() {
     return {
       backgroundColor: 'transparent',
       border: 0,
-      color: '#FFFFFF',
-      opacity: 0.75,
+      color: 'rgba(255, 255, 255, 0.75)',
       textAlign: 'center',
       textTransform: 'uppercase',
     }
@@ -63,6 +65,27 @@ const ColorColumnStyles = {
     return {
       alignSelf: 'flex-end'
     }
+  },
+  buttonDragMe() {
+    return {
+      background: 'transparent',
+      border: '1px solid rgba(255, 255, 255, 0.75)',
+      fontSize: 0,
+      left: 20,
+      marginTop: -15,
+      padding: 10,
+      position: 'absolute',
+      top: '50%',
+      touchAction: 'none',
+    }
+  },
+  buttonDragMeBar(modifiers) {
+    return mix(modifiers, {
+      backgroundColor: 'rgba(255, 255, 255, 0.75)',
+      display: 'block',
+      height: 2,
+      width: 10,
+    })
   }
 }
 

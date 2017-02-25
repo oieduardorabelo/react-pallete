@@ -100,9 +100,15 @@ class App extends React.Component {
 
   dragulaDecorator = (refInstance) => {
     if (refInstance) {
-      const options = {};
+      const options = {
+        moves(el, containerMove, handle) {
+          const handleId = handle.getAttribute('data-id');
+          if (handleId === 'drag-me') { return true }
+          return false;
+        }
+      };
       const drag = Dragula([refInstance], options);
-      drag.on('drop', this.rearrangeItems)
+      drag.on('drop', this.rearrangeItems);
     }
   }
 
