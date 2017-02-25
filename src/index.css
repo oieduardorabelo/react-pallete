@@ -1,18 +1,3 @@
-html {
-  font-size: 20px;
-}
-
-body {
-  font-family: sans-serif;
-  margin: 0;
-  padding: 0;
-}
-
-input {
-  font-family: inherit;
-  font-size: inherit;
-}
-
 @keyframes fadeIn {
   0% { opacity: 0 }
   100% { opacity: 1 }
@@ -21,4 +6,31 @@ input {
 @keyframes slideIn {
   0% { transform: translateY(50%) }
   100% { transform: translateY(0) }
+}
+
+@keyframes jump {
+  40% {
+    transform: translateY(20px) scale(1.3);
+    opacity: .9;
+  }
+  40% {
+    rx: 10px;
+    ry: 10px;
+    stroke-width: 3px;
+  }
+  45% {
+    rx: 15px;
+    ry: 7px;
+    stroke-width: 4px;
+  }
+  55% {
+    rx: 10px;
+    ry: 10px;
+  }
+}
+
+@keyframes shadow {
+  45% {
+    opacity: .15;
+  }
 }

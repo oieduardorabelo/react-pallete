@@ -1,0 +1,118 @@
+import { mix } from './domain';
+
+const ellipse = {
+  transformOrigin: 'center',
+}
+
+const LoaderStyles = {
+  container: {
+    alignItems: 'center',
+    animation: 'fadeIn 200ms linear',
+    display: 'flex',
+    flexDirection: 'column',
+    height: '100vh',
+    justifyContent: 'center',
+    position: 'relative',
+    width: '100vw',
+  },
+  containerSvg: {
+    height: 80,
+    position: 'relative',
+    width: 210,
+  },
+  svg: {
+    position: 'absolute',
+  },
+  ellipse01: mix(ellipse, {
+    animation: 'jump 600ms infinite ease-in-out',
+    animationDelay: '0ms',
+    cx: '25px',
+    opacity: 0.7,
+    stroke: '#F1725D',
+    strokeWidth: '3px',
+  }),
+  ellipse02: mix(ellipse, {
+    animation: 'jump 600ms infinite ease-in-out',
+    animationDelay: '75ms',
+    cx: '65px',
+    opacity: 0.7,
+    stroke: '#38BDAB',
+    strokeWidth: '3px',
+  }),
+  ellipse03: mix(ellipse, {
+    animation: 'jump 600ms infinite ease-in-out',
+    animationDelay: '150ms',
+    cx: '105px',
+    opacity: 0.7,
+    stroke: '#9D30A5',
+    strokeWidth: '3px',
+  }),
+  ellipse04: mix(ellipse, {
+    animation: 'jump 600ms infinite ease-in-out',
+    animationDelay: '225ms',
+    cx: '145px',
+    opacity: 0.7,
+    stroke: '#B779E2',
+    strokeWidth: '3px',
+  }),
+  ellipse05: mix(ellipse, {
+    animation: 'jump 600ms infinite ease-in-out',
+    animationDelay: '300ms',
+    cx: '185px',
+    opacity: 0.7,
+    stroke: '#683893',
+    strokeWidth: '3px',
+  }),
+  ellipse06: mix(ellipse, {
+    animation: 'shadow 600ms infinite ease-in-out',
+    animationDelay: '0ms',
+    cx: '25px',
+    cy: '48px',
+    fill: '#333333',
+    opacity: 0.05,
+    rx: 0,
+    ry: 0,
+  }),
+  ellipse07: mix(ellipse, {
+    animation: 'shadow 600ms infinite ease-in-out',
+    animationDelay: '75ms',
+    cx: '65px',
+    cy: '48px',
+    fill: '#333333',
+    opacity: 0.05,
+    rx: 0,
+    ry: 0,
+  }),
+  ellipse08: mix(ellipse, {
+    animation: 'shadow 600ms infinite ease-in-out',
+    animationDelay: '150ms',
+    cx: '105px',
+    cy: '48px',
+    fill: '#333333',
+    opacity: 0.05,
+    rx: 0,
+    ry: 0,
+  }),
+  ellipse09: mix(ellipse, {
+    animation: 'shadow 600ms infinite ease-in-out',
+    animationDelay: '225ms',
+    cx: '145px',
+    cy: '48px',
+    fill: '#333333',
+    opacity: 0.05,
+    rx: 0,
+    ry: 0,
+  }),
+  ellipse10: mix(ellipse, {
+    animation: 'shadow 600ms infinite ease-in-out',
+    animationDelay: '300ms',
+    cx: '185px',
+    cy: '48px',
+    fill: '#333333',
+    opacity: 0.05,
+    rx: 0,
+    ry: 0,
+  }),
+};
+
+export default LoaderStyles;

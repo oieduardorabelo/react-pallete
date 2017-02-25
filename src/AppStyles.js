@@ -1,5 +1,6 @@
 const AppStyles = {
   container: {
+    animation: 'fadeIn 160ms linear',
     display: 'flex',
     flexDirection: 'column',
     height: '100vh',
