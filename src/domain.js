@@ -40,11 +40,11 @@ export const store = {
 export const api = {
   adapter: window.localStorage,
   getAll() {
-    const data = api.adapter.getItem('__pallete');
+    const data = api.adapter.getItem('__react-pallete');
     return JSON.parse(data);
   },
-  save(pallete) {
-    const data = JSON.stringify(pallete);
-    api.adapter.setItem('__pallete', data);
+  save(config) {
+    const data = JSON.stringify(config);
+    api.adapter.setItem('__react-pallete', data);
   },
 }

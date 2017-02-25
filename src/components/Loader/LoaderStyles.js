@@ -1,4 +1,4 @@
-import { mix } from './domain';
+import { mix } from '../../domain';
 
 const ellipse = {
   transformOrigin: 'center',

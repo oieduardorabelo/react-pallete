@@ -1,8 +1,8 @@
 import React from 'react';
 
-import { stopPropagation } from './domain';
+import { stopPropagation } from '../../domain';
 
-import styles from './ColorColumnStyles'
+import styles from '../ColorColumn/ColorColumnStyles'
 
 const panelStyles = styles.panel();
 const panelOverlayStyles = styles.panelOverlay();

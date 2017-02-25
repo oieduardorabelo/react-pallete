@@ -1,8 +1,9 @@
 import React from 'react';
 
-import { stopPropagation } from './domain';
+import { stopPropagation } from '../../domain';
 
-import Slider from './Slider'
+import Slider from '../Slider/Slider'
+
 import styles from './ColorColumnStyles'
 
 class ColorColumn extends React.Component {
@@ -19,6 +20,7 @@ class ColorColumn extends React.Component {
   }
 
   render() {
+    const { name } = this.props;
     const { showPanel, r, g, b } = this.props.data;
 
     const columnStyles = styles.row();
@@ -37,7 +39,7 @@ class ColorColumn extends React.Component {
     }
 
     return (
-      <div style={columnStyles} onClick={this.onClickTogglePanel}>
+      <div data-id={name} style={columnStyles} onClick={this.onClickTogglePanel}>
 
         <span style={styles.label()}>{columnStyles.backgroundColor}</span>
 

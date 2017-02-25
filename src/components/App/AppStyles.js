@@ -1,5 +1,5 @@
 const AppStyles = {
-  container: {
+  containerPallete: {
     animation: 'fadeIn 160ms linear',
     display: 'flex',
     flexDirection: 'column',
