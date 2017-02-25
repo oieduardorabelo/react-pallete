@@ -25,3 +25,10 @@ Mobile first color pallete generator
 <img src="./screenshots/samsungs7egde-android-6.0.1-brave-1.0.15-photo01.png" width="200"/>
 <img src="./screenshots/samsungs7egde-android-6.0.1-brave-1.0.15-photo02.png" width="200"/>
 <img src="./screenshots/samsungs7egde-android-6.0.1-brave-1.0.15-photo03.png" width="200"/>
+
+## Mac OS X El Captain - Google Chrome 56.0.2924.87
+
+Offline example, in localhost:
+
+<img src="./screenshots/mac-osx-el-captain-google-chrome-56.0.2924.87-photo01.png" width="200"/>
+<img src="./screenshots/mac-osx-el-captain-google-chrome-56.0.2924.87-photo02.png" width="200"/>
