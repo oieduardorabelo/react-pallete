@@ -30,5 +30,5 @@ Mobile first color pallete generator
 
 Offline example, in localhost:
 
-<img src="./screenshots/mac-osx-el-captain-google-chrome-56.0.2924.87-photo01.png" width="200"/>
-<img src="./screenshots/mac-osx-el-captain-google-chrome-56.0.2924.87-photo02.png" width="200"/>
+<img src="./screenshots/mac-osx-el-captain-google-chrome-56.0.2924.87-photo01.jpg" width="300"/>
+<img src="./screenshots/mac-osx-el-captain-google-chrome-56.0.2924.87-photo02.png" width="300"/>
