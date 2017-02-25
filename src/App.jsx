@@ -1,9 +1,11 @@
 import React from 'react';
+import ShakeJS from 'shake.js';
 
-import { api, store } from './domain';
+import { api, store, rgbRandom } from './domain';
 
 import Loader from './Loader';
 import ColorColumn from './ColorColumn';
+import ShakePanel from './ShakePanel';
 
 import styles from './AppStyles';
 
@@ -12,8 +14,15 @@ const LOADING_TIME = 2000;
 class App extends React.Component {
   constructor(props) {
     super(props);
+
+    this.shakeInstance = new ShakeJS({
+      threshold: 15,
+      timeout: 1500,
+    })
+
     this.state = {
       isLoading: true,
+      showShakePanel: false,
       pallete: {},
     };
   }
@@ -29,12 +38,34 @@ class App extends React.Component {
       api.save(pallete);
     }
 
+    this.shakeInstance.start();
+    window.addEventListener('shake', this.onShakeWindow, false)
+
     setTimeout(() => {
       this.setState({ isLoading: false, pallete });
     }, LOADING_TIME);
   }
 
-  saveData = (pallete) => {
+  componentWillUnmount() {
+    this.shakeInstance.stop();
+    window.removeEventListener('shake', this.onShakeWindow, false);
+  }
+
+  onShakeWindow = (event) => {
+    const {pallete} = this.state;
+    Object.keys(pallete).forEach(colorColumn => {
+      pallete[colorColumn].r = rgbRandom();
+      pallete[colorColumn].g = rgbRandom();
+      pallete[colorColumn].b = rgbRandom();
+    })
+
+    this.savePallete(pallete);
+    this.setState({
+      showShakePanel: !this.state.showShakePanel,
+    })
+  }
+
+  savePallete = (pallete) => {
     api.save(pallete);
     this.setState(pallete);
   }
@@ -42,17 +73,24 @@ class App extends React.Component {
   onChangeColorSlider = (colorName, value, colorColumn) => {
     const {pallete} = this.state;
     pallete[colorColumn][colorName] = value;
-    this.saveData(pallete);
+    this.savePallete(pallete);
   }
 
   onClickTogglePanel = (colorColumn) => {
     const {pallete} = this.state;
     pallete[colorColumn].showPanel = !pallete[colorColumn].showPanel;
-    this.saveData(pallete);
+    this.savePallete(pallete);
+  }
+
+  onClickToggleShakePanel = () => {
+    this.setState({
+      showShakePanel: !this.state.showShakePanel,
+    });
   }
 
   render() {
-    const {isLoading, pallete} = this.state;
+    const {isLoading, pallete, showShakePanel} = this.state;
+
     const colorPallete = Object.keys(pallete)
       .map(key =>
         <ColorColumn
@@ -71,6 +109,11 @@ class App extends React.Component {
     return (
       <div style={styles.container}>
         {colorPallete}
+        {showShakePanel && (
+          <ShakePanel
+            onClickToggleShakePanel={this.onClickToggleShakePanel}
+          />
+        )}
       </div>
     )
   }
