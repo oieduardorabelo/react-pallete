@@ -1,145 +1,77 @@
 import React from 'react';
 
-const rgbRandom = () => Math.floor(Math.random() * 255);
-const stopPropagation = event => {
-  event.preventDefault();
-  event.stopPropagation();
-}
+import { stopPropagation } from './domain';
 
-const styles = {
-  row() {
-    return {
-      alignItems: 'center',
-      display: 'flex',
-      flexGrow: 1,
-      height: '100%',
-      justifyContent: 'center',
-    }
-  },
-  label() {
-    return {
-      backgroundColor: 'transparent',
-      border: 0,
-      color: '#FFFFFF',
-      opacity: 0.75,
-      textAlign: 'center',
-      textTransform: 'uppercase',
-    }
-  },
-  panel() {
-    return {
-      animation: 'slideIn 100ms linear',
-      backgroundColor: '#FFFFFF',
-      bottom: 0,
-      display: 'none',
-      flexDirection: 'column',
-      left: 0,
-      padding: 20,
-      position: 'fixed',
-      right: 0,
-      zIndex: 2,
-    }
-  },
-  panelOverlay() {
-    return {
-      animation: 'fadeIn 160ms linear',
-      backgroundColor: 'rgba(0, 0, 0, 0.5)',
-      bottom: 0,
-      display: 'none',
-      left: 0,
-      position: 'fixed',
-      right: 0,
-      top: 0,
-      zIndex: 1,
-    }
-  },
-  inputSliders() {
-    return {
-      marginBottom: 5,
-      marginTop: 5,
-      maxWidth: '100%',
-    }
-  },
-  panelDisplay() {
-    return {
-      height: 20,
-      marginBottom: 20,
-      marginTop: 10,
-    }
-  },
-  panelClose() {
-    return {
-      alignSelf: 'flex-end'
-    }
-  }
-}
+import Slider from './Slider'
+import styles from './ColorColumnStyles'
 
 class ColorColumn extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      r: rgbRandom(),
-      g: rgbRandom(),
-      b: rgbRandom(),
-      showPanel: false,
-    }
-  }
-
   onClickTogglePanel = (event) => {
     event.preventDefault();
     event.stopPropagation();
-    this.setState({ showPanel: !this.state.showPanel })
+    this.props.onClickTogglePanel(this.props.name);
   }
 
   onChangeColorSlider = (event) => {
     const target = event.target;
     const {name, value} = target;
-    this.setState({ [name]: value });
+    this.props.onChangeColorSlider(name, value, this.props.name)
   }
 
   render() {
-    const { r, g, b, showPanel } = this.state;
+    const { showPanel, r, g, b } = this.props.data;
+
     const columnStyles = styles.row();
     const panelStyles = styles.panel();
-    const panelDisplay = styles.panelDisplay();
+    const panelDisplayStyles = styles.panelDisplay();
     const panelOverlayStyles = styles.panelOverlay();
 
-    columnStyles.backgroundColor = `rgb(${r},${g},${b})`;
-    panelDisplay.backgroundColor = `rgb(${r},${g},${b})`;
+    const bgColor = `rgb(${r},${g},${b})`;
+    columnStyles.backgroundColor = bgColor;
+    panelDisplayStyles.backgroundColor = bgColor;
 
     if (showPanel) {
-      panelStyles.display = 'flex';
-      panelOverlayStyles.display = 'flex';
+      const displayFlex = 'flex';
+      panelStyles.display = displayFlex;
+      panelOverlayStyles.display = displayFlex;
     }
 
     return (
       <div style={columnStyles} onClick={this.onClickTogglePanel}>
+
         <span style={styles.label()}>{columnStyles.backgroundColor}</span>
+
         <div style={panelOverlayStyles} onClick={this.onClickTogglePanel} />
+
         <div style={panelStyles} onClick={stopPropagation}>
-          <button style={styles.panelClose()} type="button" onClick={this.onClickTogglePanel}>Close</button>
+          <button
+            onClick={this.onClickTogglePanel}
+            style={styles.panelClose()}
+            type="button"
+          >
+            Close
+          </button>
+
           <span>Current color:</span>
-          <div style={panelDisplay} />
-          <input
-            style={styles.inputSliders()}
-            name="r" type="range"
-            min="0" max="255" step="1"
-            value={this.state.r}
+          <div style={panelDisplayStyles} />
+
+          <Slider
+            name="r"
             onChange={this.onChangeColorSlider}
+            style={styles.inputSliders()}
+            value={r}
           />
-          <input
-            style={styles.inputSliders()}
-            name="g" type="range"
-            min="0" max="255" step="1"
-            value={this.state.g}
+          <Slider
+            name="g"
             onChange={this.onChangeColorSlider}
+            style={styles.inputSliders()}
+            value={g}
           />
-          <input
-            style={styles.inputSliders()}
-            name="b" type="range"
-            min="0" max="255" step="1"
-            value={this.state.b}
+          <Slider
+            name="b"
             onChange={this.onChangeColorSlider}
+            style={styles.inputSliders()}
+            value={b}
           />
         </div>
       </div>
