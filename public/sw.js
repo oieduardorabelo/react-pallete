@@ -1,20 +1,6 @@
 var CACHE_NAME = 'react-pallete-v1';
 var urlsToCache = [
   '/',
-  '/android-icon-192x192.png',
-  '/apple-icon-114x114.png',
-  '/apple-icon-120x120.png',
-  '/apple-icon-144x144.png',
-  '/apple-icon-152x152.png',
-  '/apple-icon-180x180.png',
-  '/apple-icon-57x57.png',
-  '/apple-icon-60x60.png',
-  '/apple-icon-72x72.png',
-  '/apple-icon-76x76.png',
-  '/favicon-16x16.png',
-  '/favicon-32x32.png',
-  '/favicon-96x96.png',
-  '/ms-icon-144x144.png',
 ];
 
 self.addEventListener('install', function(event) {
@@ -54,22 +40,5 @@ self.addEventListener('fetch', function(event) {
         );
       }
     )
-  );
-});
-
-self.addEventListener('activate', function(event) {
-
-  var cacheWhitelist = ['react-pallete-v1'];
-
-  event.waitUntil(
-    caches.keys().then(function(cacheNames) {
-      return Promise.all(
-        cacheNames.map(function(cacheName) {
-          if (cacheWhitelist.indexOf(cacheName) === -1) {
-            return caches.delete(cacheName);
-          }
-        })
-      );
-    })
   );
 });

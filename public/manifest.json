@@ -3,7 +3,7 @@
  "display": "standalone",
  "name": "react-pallete",
  "orientation": "portrait",
- "start_url": "/?utm_source=web_app_manifest",
+ "start_url": "/",
  "theme_color": "rgb(48, 52, 78)",
  "icons": [
   {
