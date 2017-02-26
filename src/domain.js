@@ -47,4 +47,7 @@ export const api = {
     const data = JSON.stringify(config);
     api.adapter.setItem('__react-pallete', data);
   },
+
 }
+
+
