@@ -2,6 +2,8 @@ import React from 'react';
 
 import { api, store } from '../../domain';
 
+import Loader from '../Loader/Loader';
+
 const LOADING_TIME = 2000;
 
 function FetchPallete(Component) {
@@ -11,8 +13,8 @@ function FetchPallete(Component) {
 
       this.state = {
         isLoading: true,
-        sequence: [],
         pallete: {},
+        sequence: [],
       }
     }
 
@@ -39,11 +41,16 @@ function FetchPallete(Component) {
     }
 
     render() {
+      const {isLoading} = this.state;
+
+      if (isLoading) {
+        return <Loader />
+      }
+
       return (
         <Component
-          isLoading={this.state.isLoading}
-          sequence={this.state.sequence}
           pallete={this.state.pallete}
+          sequence={this.state.sequence}
         />
       )
     }

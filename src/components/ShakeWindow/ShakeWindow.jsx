@@ -3,6 +3,7 @@ import ShakeJS from 'shake.js';
 
 import { api, rgbRandom } from '../../domain';
 
+import ShakePanel from '../ShakePanel/ShakePanel';
 
 function ShakeWindow(Component) {
   return class ShakeWindow extends React.Component {
@@ -15,15 +16,10 @@ function ShakeWindow(Component) {
       })
 
       this.state = {
+        pallete: {...this.props.pallete},
+        sequence: [...this.props.sequence],
         showShakePanel: false,
-        sequence: [],
-        pallete: [],
       };
-    }
-
-    componentWillReceiveProps(nextProps) {
-      const {sequence, pallete} = nextProps;
-      this.setState({ sequence, pallete }, api.save({ sequence, pallete }));
     }
 
     componentDidMount() {
@@ -59,14 +55,20 @@ function ShakeWindow(Component) {
     }
 
     render() {
+      const {showShakePanel, pallete, sequence} = this.state;
+
       return (
-        <Component
-          isLoading={this.props.isLoading}
-          pallete={this.state.pallete}
-          sequence={this.state.sequence}
-          showShakePanel={this.state.showShakePanel}
-          onClickToggleShakePanel={this.onClickToggleShakePanel}
-        />
+        <div>
+          <Component
+            pallete={pallete}
+            sequence={sequence}
+          />
+          {showShakePanel && (
+            <ShakePanel
+              onClickToggleShakePanel={this.onClickToggleShakePanel}
+            />
+          )}
+        </div>
       )
     }
   }

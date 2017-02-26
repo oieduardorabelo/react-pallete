@@ -6,8 +6,6 @@ import { api } from '../../domain';
 import ShakeWindow from '../ShakeWindow/ShakeWindow';
 import ColorColumn from '../ColorColumn/ColorColumn';
 import FetchPallete from '../FetchPallete/FetchPallete';
-import Loader from '../Loader/Loader';
-import ShakePanel from '../ShakePanel/ShakePanel';
 
 import styles from './AppStyles';
 
@@ -17,14 +15,9 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      sequence: [],
-      pallete: [],
+      pallete: {...this.props.pallete},
+      sequence: [...this.props.sequence],
     };
-  }
-
-  componentWillReceiveProps(nextProps) {
-    const {sequence, pallete} = nextProps;
-    this.setState({ sequence, pallete }, api.save({ sequence, pallete }));
   }
 
   onChangeColorSlider = (colorName, value, colorColumn) => {
@@ -71,7 +64,6 @@ class App extends React.Component {
   }
 
   render() {
-    const {isLoading, showShakePanel, onClickToggleShakePanel} = this.props;
     const {pallete, sequence} = this.state;
 
     const colorPallete = sequence
@@ -85,10 +77,6 @@ class App extends React.Component {
         />
       )
 
-    if (isLoading) {
-      return <Loader />
-    }
-
     return (
       <div>
         <div
@@ -97,11 +85,6 @@ class App extends React.Component {
         >
           {colorPallete}
         </div>
-        {showShakePanel && (
-          <ShakePanel
-            onClickToggleShakePanel={onClickToggleShakePanel}
-          />
-        )}
       </div>
     )
   }
