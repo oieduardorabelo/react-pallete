@@ -54,7 +54,7 @@ class App extends React.Component {
   }
 
   rearrangeItems = (el, target, source, sibling) => {
-    const {sequence,pallete} = this.state;
+    const {sequence, pallete} = this.state;
     const sequenceCopy = [...sequence];
 
     const elId = el.getAttribute('data-id');

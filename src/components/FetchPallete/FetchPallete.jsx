@@ -27,15 +27,14 @@ function FetchPallete(Component) {
       } else {
         pallete = Object.assign({}, store);
         sequence = Object.keys(pallete);
-        api.save({ sequence, pallete });
       }
 
       setTimeout(() => {
         this.setState({
           isLoading: false,
-          sequence,
           pallete,
-        });
+          sequence,
+        }, api.save({ sequence, pallete }));
       }, LOADING_TIME);
     }
 

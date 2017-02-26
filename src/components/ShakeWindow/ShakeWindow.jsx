@@ -27,8 +27,8 @@ function ShakeWindow(Component) {
     }
 
     componentDidMount() {
-        this.shakeInstance.start();
-        window.addEventListener('shake', this.onShakeWindow, false);
+      this.shakeInstance.start();
+      window.addEventListener('shake', this.onShakeWindow, false);
     }
 
     componentWillUnmount() {
@@ -37,7 +37,7 @@ function ShakeWindow(Component) {
     }
 
     onShakeWindow = (event) => {
-      const { sequence, pallete } = this.state;
+      const {sequence, pallete, showShakePanel} = this.state;
 
       Object.keys(pallete).forEach(colorColumn => {
         pallete[colorColumn].r = rgbRandom();
@@ -46,14 +46,16 @@ function ShakeWindow(Component) {
       })
 
       this.setState({
-        showShakePanel: !this.state.showShakePanel,
+        pallete,
+        sequence,
+        showShakePanel: !showShakePanel,
       }, api.save({ sequence, pallete }));
     }
 
     onClickToggleShakePanel = () => {
-      this.setState({
-        showShakePanel: !this.state.showShakePanel,
-      });
+      this.setState(state => ({
+        showShakePanel: !state.showShakePanel
+      }));
     }
 
     render() {
