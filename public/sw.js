@@ -1,44 +1,164 @@
-var CACHE_NAME = 'react-pallete-v1';
-var urlsToCache = [
-  '/',
-];
+// thanks Jake! https://github.com/jakearchibald/simple-serviceworker-tutorial/blob/gh-pages/sw.js
+var currentCache = 'react-pallete-v2'
 
-self.addEventListener('install', function(event) {
+// Chrome's currently missing some useful cache methods,
+// this polyfill adds them.
+polyfillCache()
+
+// Here comes the install event!
+// This only happens once, when the browser sees this
+// version of the ServiceWorker for the first time.
+self.addEventListener('install', function onServiceWorkerInstall(event) {
+  console.log('install event', event)
+  if (self.skipWaiting) { self.skipWaiting(); }
+  // We pass a promise to event.waitUntil to signal how
+  // long install takes, and if it failed
   event.waitUntil(
-    caches.open(CACHE_NAME)
-      .then(function(cache) {
-        return cache.addAll(urlsToCache);
-      })
-  );
-});
+    // We open a cache…
+    caches.open(currentCache)
+    .then(function addResourceToCache(cache) {
+      return cache.addAll([
+        './',
+        '/favicon-16x16.png',
+        '/favicon-96x96.png',
+      ])
+    })
+  )
+})
 
-self.addEventListener('fetch', function(event) {
-  event.respondWith(
-    caches.match(event.request)
-      .then(function(response) {
-        if (response) {
-          return response;
-        }
-        var fetchRequest = event.request.clone();
-
-        return fetch(fetchRequest).then(
-          function(response) {
-            if(!response || response.status !== 200 || response.type !== 'basic') {
-              return response;
+self.addEventListener('activate', function(event) {
+  // Claim any clients immediately, so that the page will be under SW control without reloading.
+  event.waitUntil(
+    self.clients.claim()
+    .then(function() {
+      caches.keys().then(function(cacheNames) {
+        return Promise.all(
+          cacheNames.filter(function(cacheName) {
+            // Return true if you want to remove this cache,
+            // but remember that caches are shared across
+            // the whole origin
+            if (cacheName !== currentCache) {
+              return true;
             }
-            var responseToCache = response.clone();
-
-            if (/static\//.test(event.request.url)) {
-              caches.open(CACHE_NAME)
-                .then(function(cache) {
-                  cache.put(event.request, responseToCache);
-                });
-            }
-
-            return response;
-          }
+          }).map(function(cacheName) {
+            return caches.delete(cacheName);
+          })
         );
-      }
-    )
-  );
+      })
+    })
+);
 });
+
+// The fetch event happens for the page request with the
+// ServiceWorker's scope, and any request made within that
+// page
+self.addEventListener('fetch', function onServiceWorkerFetch(event) {
+  event.respondWith(
+    caches
+    .match(event.request)
+    .then(function(cachedResponse) {
+      if (cachedResponse) {
+        return cachedResponse;
+      }
+
+      return fetch(event.request)
+        .then(function(networkResponse) {
+          caches
+            .open(currentCache)
+            .then(function (cache) {
+              return cache.add(event.request);
+            })
+
+          return networkResponse;
+        });
+    })
+  )
+})
+
+
+function polyfillCache() {
+  /* eslint-disable */
+  if (!Cache.prototype.add) {
+    Cache.prototype.add = function add(request) {
+      return this.addAll([request])
+    }
+  }
+
+  if (!Cache.prototype.addAll) {
+    Cache.prototype.addAll = function addAll(requests) {
+      var cache = this
+
+      // Since DOMExceptions are not constructable:
+      function NetworkError(message) {
+        this.name = 'NetworkError'
+        this.code = 19
+        this.message = message
+      }
+      NetworkError.prototype = Object.create(Error.prototype)
+
+      return Promise.resolve().then(function() {
+        if (arguments.length < 1) throw new TypeError()
+
+        // Simulate sequence<(Request or USVString)> binding:
+        var sequence = []
+
+        requests = requests.map(function(request) {
+          if (request instanceof Request) {
+            return request
+          }
+          else {
+            return String(request) // may throw TypeError
+          }
+        })
+
+        return Promise.all(
+          requests.map(function(request) {
+            if (typeof request === 'string') {
+              request = new Request(request)
+            }
+
+            var scheme = new URL(request.url).protocol
+
+            if (scheme !== 'http:' && scheme !== 'https:') {
+              throw new NetworkError('Invalid scheme')
+            }
+
+            return fetch(request.clone())
+          })
+        )
+      }).then(function(responses) {
+        // TODO: check that requests don't overwrite one another
+        // (don't think this is possible to polyfill due to opaque responses)
+        return Promise.all(
+          responses.map(function(response, i) {
+            return cache.put(requests[i], response)
+          })
+        )
+      }).then(function() {
+        return undefined
+      })
+    }
+  }
+
+  if (!CacheStorage.prototype.match) {
+    // This is probably vulnerable to race conditions (removing caches etc)
+    CacheStorage.prototype.match = function match(request, opts) {
+      var caches = this
+
+      return this.keys().then(function(cacheNames) {
+        var match
+
+        return cacheNames.reduce(function(chain, cacheName) {
+          return chain.then(function() {
+            return match || caches.open(cacheName).then(function(cache) {
+              return cache.match(request, opts)
+            }).then(function(response) {
+              match = response
+              return match
+            })
+          })
+        }, Promise.resolve())
+      })
+    }
+  }
+}
