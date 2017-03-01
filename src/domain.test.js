@@ -42,3 +42,28 @@ describe('domain.js - store', () => {
     expect(testKeys).toEqual(['color1', 'color2', 'color3', 'color4', 'color5']);
   })
 })
+
+describe('domain.js - api', () => {
+  it('should have the correct adapter', () => {
+    const test = api.adapter;
+    expect(test).toBeInstanceOf(Object);
+  })
+
+  it('should get all stored items', () => {
+    const test = api.getAll();
+
+    expect(test).toEqual({ foo: 'foo' });
+    expect(api.adapter.getItem).toHaveBeenCalledTimes(1);
+    expect(api.adapter.getItem).toHaveBeenCalledWith('__react-pallete');
+  })
+
+  it('should store the passed object', () => {
+    const test = api.save({ bar: 'bar' });
+
+    expect(api.adapter.setItem).toHaveBeenCalledTimes(1);
+    expect(api.adapter.setItem).toHaveBeenCalledWith(
+      '__react-pallete',
+      JSON.stringify({ bar: 'bar' })
+    );
+  })
+})
