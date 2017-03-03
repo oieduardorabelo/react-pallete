@@ -1,0 +1,55 @@
+exports[`test renders correctly 1`] = `
+<ShakePanel
+  onClickToggleShakePanel={[Function]}>
+  <div>
+    <div
+      onClick={[Function]}
+      style={
+        Object {
+          "animation": "fadeIn 160ms linear",
+          "backgroundColor": "rgba(0, 0, 0, 0.5)",
+          "bottom": 0,
+          "display": "flex",
+          "left": 0,
+          "position": "fixed",
+          "right": 0,
+          "top": 0,
+          "zIndex": 1,
+        }
+      } />
+    <div
+      onClick={[Function]}
+      style={
+        Object {
+          "animation": "slideIn 100ms linear",
+          "backgroundColor": "#FFFFFF",
+          "bottom": 0,
+          "display": "flex",
+          "flexDirection": "column",
+          "left": 0,
+          "padding": 20,
+          "position": "fixed",
+          "right": 0,
+          "zIndex": 2,
+        }
+      }>
+      <button
+        onClick={[Function]}
+        style={
+          Object {
+            "alignSelf": "flex-end",
+          }
+        }
+        type="button">
+        Close
+      </button>
+      <span>
+        Shake it off!
+      </span>
+      <p>
+        When you shake your phone, we set random colors to your pallete!
+      </p>
+    </div>
+  </div>
+</ShakePanel>
+`;
