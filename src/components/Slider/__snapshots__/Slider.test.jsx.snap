@@ -1,0 +1,10 @@
+exports[`test renders correctly 1`] = `
+<input
+  max="255"
+  min="0"
+  name="test"
+  onChange={[Function]}
+  step="1"
+  type="range"
+  value={0} />
+`;

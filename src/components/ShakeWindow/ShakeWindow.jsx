@@ -7,6 +7,11 @@ import ShakePanel from '../ShakePanel/ShakePanel';
 
 function ShakeWindow(Component) {
   return class ShakeWindow extends React.Component {
+    static propTypes = {
+      pallete: React.PropTypes.shape({}).isRequired,
+      sequence: React.PropTypes.arrayOf(React.PropTypes.string).isRequired,
+    }
+
     constructor(props) {
       super(props);
 

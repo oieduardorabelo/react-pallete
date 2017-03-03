@@ -10,4 +10,11 @@ const Slider = (props) => (
   />
 )
 
+Slider.propTypes = {
+  styles: React.PropTypes.shape({}),
+  name: React.PropTypes.string.isRequired,
+  value: React.PropTypes.number.isRequired,
+  onChange: React.PropTypes.func.isRequired,
+}
+
 export default Slider
