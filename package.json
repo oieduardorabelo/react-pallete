@@ -6,7 +6,10 @@
     "react-scripts": "0.9.0"
   },
   "dependencies": {
+    "enzyme": "^2.7.1",
+    "enzyme-to-json": "^1.5.0",
     "react": "^15.4.2",
+    "react-addons-test-utils": "^15.4.2",
     "react-dom": "^15.4.2",
     "react-dragula": "^1.1.17",
     "shake.js": "^1.2.2"
