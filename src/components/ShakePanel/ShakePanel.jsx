@@ -30,4 +30,8 @@ const ShakePanel = (props) => (
   </div>
 )
 
+ShakePanel.propTypes = {
+  onClickToggleShakePanel: React.PropTypes.func.isRequired,
+}
+
 export default ShakePanel;
