@@ -3,10 +3,15 @@ import ReactDOM from 'react-dom';
 
 import './index.css';
 
+import { api, store } from './domain';
+
+import AppProvider from './components/AppProvider/AppProvider';
 import App from './components/App/App';
 
 ReactDOM.render(
-  <App />,
+  <AppProvider api={api} store={store}>
+    <App />
+  </AppProvider>,
   document.getElementById('root')
 );
 
