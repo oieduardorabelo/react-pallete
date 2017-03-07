@@ -1,19 +1,21 @@
 import React from 'react';
 import ShakeJS from 'shake.js';
 
-import { api, rgbRandom } from '../../domain';
+import { rgbRandom } from '../../domain';
 
 import ShakePanel from '../ShakePanel/ShakePanel';
 
 function ShakeWindow(Component) {
-  return class ShakeWindow extends React.Component {
+  class ShakeWindow extends React.Component {
     static propTypes = {
       pallete: React.PropTypes.shape({}).isRequired,
       sequence: React.PropTypes.arrayOf(React.PropTypes.string).isRequired,
     }
 
-    constructor(props) {
+    constructor(props, context) {
       super(props);
+
+      this.api = context.api;
 
       this.shakeInstance = new ShakeJS({
         threshold: 15,
@@ -50,7 +52,7 @@ function ShakeWindow(Component) {
         pallete,
         sequence,
         showShakePanel: !showShakePanel,
-      }, api.save({ sequence, pallete }));
+      }, this.api.save({ sequence, pallete }));
     }
 
     onClickToggleShakePanel = () => {
@@ -77,6 +79,12 @@ function ShakeWindow(Component) {
       )
     }
   }
+
+  ShakeWindow.contextTypes = {
+    api: React.PropTypes.object.isRequired,
+  }
+
+  return ShakeWindow;
 }
 
 export default ShakeWindow;

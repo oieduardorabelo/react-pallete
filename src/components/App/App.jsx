@@ -1,8 +1,6 @@
 import React from 'react';
 import Dragula from 'react-dragula';
 
-import { api } from '../../domain';
-
 import ShakeWindow from '../ShakeWindow/ShakeWindow';
 import ColorColumn from '../ColorColumn/ColorColumn';
 import FetchPallete from '../FetchPallete/FetchPallete';
@@ -11,8 +9,10 @@ import styles from './AppStyles';
 
 
 class App extends React.Component {
-  constructor(props) {
+  constructor(props, context) {
     super(props);
+
+    this.api = context.api;
 
     this.state = {
       pallete: {...this.props.pallete},
@@ -23,13 +23,13 @@ class App extends React.Component {
   onChangeColorSlider = (colorName, value, colorColumn) => {
     const {sequence, pallete} = this.state;
     pallete[colorColumn][colorName] = value;
-    this.setState({ pallete }, api.save({ sequence, pallete }))
+    this.setState({ pallete }, this.api.save({ sequence, pallete }))
   }
 
   onClickTogglePanel = (colorColumn) => {
     const {sequence, pallete} = this.state;
     pallete[colorColumn].showPanel = !pallete[colorColumn].showPanel;
-    this.setState({ pallete }, api.save({ sequence, pallete }));
+    this.setState({ pallete }, this.api.save({ sequence, pallete }));
   }
 
   dragulaDecorator = (refInstance) => {
@@ -59,7 +59,7 @@ class App extends React.Component {
 
     this.setState(
       { sequence: sequenceCopy },
-      api.save({ sequence: sequenceCopy, pallete }),
+      this.api.save({ sequence: sequenceCopy, pallete }),
     );
   }
 
@@ -88,6 +88,10 @@ class App extends React.Component {
       </div>
     )
   }
+}
+
+App.contextTypes = {
+  api: React.PropTypes.object.isRequired,
 }
 
 export default FetchPallete(ShakeWindow(App));

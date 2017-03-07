@@ -1,15 +1,16 @@
 import React from 'react';
 
-import { api, store } from '../../domain';
-
 import Loader from '../Loader/Loader';
 
 const LOADING_TIME = 2000;
 
 function FetchPallete(Component) {
-  return class FetchPallete extends React.Component {
-    constructor(props) {
+  class FetchPallete extends React.Component {
+    constructor(props, context) {
       super(props);
+
+      this.store = context.store;
+      this.api = context.api;
 
       this.state = {
         isLoading: true,
@@ -19,7 +20,7 @@ function FetchPallete(Component) {
     }
 
     componentDidMount() {
-      const loadData = api.getAll();
+      const loadData = this.api.getAll();
       let pallete = {};
       let sequence = {};
 
@@ -27,7 +28,7 @@ function FetchPallete(Component) {
         pallete = Object.assign({}, loadData.pallete);
         sequence = [...loadData.sequence];
       } else {
-        pallete = Object.assign({}, store);
+        pallete = Object.assign({}, this.store);
         sequence = Object.keys(pallete);
       }
 
@@ -36,7 +37,7 @@ function FetchPallete(Component) {
           isLoading: false,
           pallete,
           sequence,
-        }, api.save({ sequence, pallete }));
+        }, this.api.save({ sequence, pallete }));
       }, LOADING_TIME);
     }
 
@@ -55,6 +56,13 @@ function FetchPallete(Component) {
       )
     }
   }
+
+  FetchPallete.contextTypes = {
+    store: React.PropTypes.object.isRequired,
+    api: React.PropTypes.object.isRequired,
+  }
+
+  return FetchPallete;
 }
 
 export default FetchPallete;
