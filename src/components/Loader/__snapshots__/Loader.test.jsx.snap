@@ -1,0 +1,295 @@
+exports[`test renders correctly 1`] = `
+<div
+  style={
+    Object {
+      "alignItems": "center",
+      "animation": "fadeIn 200ms linear",
+      "display": "flex",
+      "flexDirection": "column",
+      "height": "100vh",
+      "justifyContent": "center",
+      "position": "relative",
+      "width": "100vw",
+    }
+  }>
+  <div
+    style={
+      Object {
+        "height": 80,
+        "position": "relative",
+        "width": 210,
+      }
+    }>
+    <svg
+      height="80"
+      style={
+        Object {
+          "position": "absolute",
+        }
+      }
+      width="210">
+      <ellipse
+        cx="25"
+        cy="20"
+        fill="none"
+        rx="10"
+        ry="10"
+        style={
+          Object {
+            "animation": "jump 600ms infinite ease-in-out",
+            "animationDelay": "0ms",
+            "cx": "25px",
+            "opacity": 0.7,
+            "stroke": "#F1725D",
+            "strokeWidth": "3px",
+            "transformOrigin": "center",
+          }
+        } />
+    </svg>
+    <svg
+      height="80"
+      style={
+        Object {
+          "position": "absolute",
+        }
+      }
+      width="210">
+      <ellipse
+        cx="25"
+        cy="20"
+        fill="none"
+        rx="10"
+        ry="10"
+        style={
+          Object {
+            "animation": "jump 600ms infinite ease-in-out",
+            "animationDelay": "75ms",
+            "cx": "65px",
+            "opacity": 0.7,
+            "stroke": "#38BDAB",
+            "strokeWidth": "3px",
+            "transformOrigin": "center",
+          }
+        } />
+    </svg>
+    <svg
+      height="80"
+      style={
+        Object {
+          "position": "absolute",
+        }
+      }
+      width="210">
+      <ellipse
+        cx="25"
+        cy="20"
+        fill="none"
+        rx="10"
+        ry="10"
+        style={
+          Object {
+            "animation": "jump 600ms infinite ease-in-out",
+            "animationDelay": "150ms",
+            "cx": "105px",
+            "opacity": 0.7,
+            "stroke": "#9D30A5",
+            "strokeWidth": "3px",
+            "transformOrigin": "center",
+          }
+        } />
+    </svg>
+    <svg
+      height="80"
+      style={
+        Object {
+          "position": "absolute",
+        }
+      }
+      width="210">
+      <ellipse
+        cx="25"
+        cy="20"
+        fill="none"
+        rx="10"
+        ry="10"
+        style={
+          Object {
+            "animation": "jump 600ms infinite ease-in-out",
+            "animationDelay": "225ms",
+            "cx": "145px",
+            "opacity": 0.7,
+            "stroke": "#B779E2",
+            "strokeWidth": "3px",
+            "transformOrigin": "center",
+          }
+        } />
+    </svg>
+    <svg
+      height="80"
+      style={
+        Object {
+          "position": "absolute",
+        }
+      }
+      width="210">
+      <ellipse
+        cx="25"
+        cy="20"
+        fill="none"
+        rx="10"
+        ry="10"
+        style={
+          Object {
+            "animation": "jump 600ms infinite ease-in-out",
+            "animationDelay": "300ms",
+            "cx": "185px",
+            "opacity": 0.7,
+            "stroke": "#683893",
+            "strokeWidth": "3px",
+            "transformOrigin": "center",
+          }
+        } />
+    </svg>
+    <svg
+      height="80"
+      style={
+        Object {
+          "position": "absolute",
+        }
+      }
+      width="210">
+      <ellipse
+        cx="25"
+        cy="20"
+        fill="none"
+        rx="10"
+        ry="10"
+        style={
+          Object {
+            "animation": "shadow 600ms infinite ease-in-out",
+            "animationDelay": "0ms",
+            "cx": "25px",
+            "cy": "48px",
+            "fill": "#333333",
+            "opacity": 0.05,
+            "rx": 0,
+            "ry": 0,
+            "transformOrigin": "center",
+          }
+        } />
+    </svg>
+    <svg
+      height="80"
+      style={
+        Object {
+          "position": "absolute",
+        }
+      }
+      width="210">
+      <ellipse
+        cx="25"
+        cy="20"
+        fill="none"
+        rx="10"
+        ry="10"
+        style={
+          Object {
+            "animation": "shadow 600ms infinite ease-in-out",
+            "animationDelay": "75ms",
+            "cx": "65px",
+            "cy": "48px",
+            "fill": "#333333",
+            "opacity": 0.05,
+            "rx": 0,
+            "ry": 0,
+            "transformOrigin": "center",
+          }
+        } />
+    </svg>
+    <svg
+      height="80"
+      style={
+        Object {
+          "position": "absolute",
+        }
+      }
+      width="210">
+      <ellipse
+        cx="25"
+        cy="20"
+        fill="none"
+        rx="10"
+        ry="10"
+        style={
+          Object {
+            "animation": "shadow 600ms infinite ease-in-out",
+            "animationDelay": "150ms",
+            "cx": "105px",
+            "cy": "48px",
+            "fill": "#333333",
+            "opacity": 0.05,
+            "rx": 0,
+            "ry": 0,
+            "transformOrigin": "center",
+          }
+        } />
+    </svg>
+    <svg
+      height="80"
+      style={
+        Object {
+          "position": "absolute",
+        }
+      }
+      width="210">
+      <ellipse
+        cx="25"
+        cy="20"
+        fill="none"
+        rx="10"
+        ry="10"
+        style={
+          Object {
+            "animation": "shadow 600ms infinite ease-in-out",
+            "animationDelay": "225ms",
+            "cx": "145px",
+            "cy": "48px",
+            "fill": "#333333",
+            "opacity": 0.05,
+            "rx": 0,
+            "ry": 0,
+            "transformOrigin": "center",
+          }
+        } />
+    </svg>
+    <svg
+      height="80"
+      style={
+        Object {
+          "position": "absolute",
+        }
+      }
+      width="210">
+      <ellipse
+        cx="25"
+        cy="20"
+        fill="none"
+        rx="10"
+        ry="10"
+        style={
+          Object {
+            "animation": "shadow 600ms infinite ease-in-out",
+            "animationDelay": "300ms",
+            "cx": "185px",
+            "cy": "48px",
+            "fill": "#333333",
+            "opacity": 0.05,
+            "rx": 0,
+            "ry": 0,
+            "transformOrigin": "center",
+          }
+        } />
+    </svg>
+  </div>
+</div>
+`;
