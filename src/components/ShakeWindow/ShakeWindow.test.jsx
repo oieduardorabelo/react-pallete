@@ -12,7 +12,8 @@ it('renders correctly', () => {
     React.createElement(
       ShakeWindow(WrappedComponent),
       { pallete: {}, sequence: [] },
-    )
+    ),
+    { context: { api: {} } }
   );
 
   expect(toJson(wrapper)).toMatchSnapshot();
@@ -23,7 +24,8 @@ it('updates pallete/sequence state correctly', () => {
     React.createElement(
       ShakeWindow(WrappedComponent),
       { pallete: {}, sequence: [] },
-    )
+    ),
+    { context: { api: {} } }
   );
 
   wrapper.setState({
@@ -39,7 +41,8 @@ it('ShakePanel displays when showShakePanel state updates correctly', () => {
     React.createElement(
       ShakeWindow(WrappedComponent),
       { pallete: {}, sequence: [] },
-    )
+    ),
+    { context: { api: {} } }
   );
 
   wrapper.setState({
@@ -54,7 +57,8 @@ it('ShakePanel hides when click on close button correctly', () => {
     React.createElement(
       ShakeWindow(WrappedComponent),
       { pallete: {}, sequence: [] },
-    )
+    ),
+    { context: { api: {} } }
   );
 
   wrapper.setState({
