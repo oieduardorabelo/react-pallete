@@ -8,9 +8,9 @@
   "dependencies": {
     "enzyme": "^2.8.2",
     "enzyme-to-json": "^1.5.1",
-    "react": "^15.5.4",
-    "react-addons-test-utils": "^15.5.1",
-    "react-dom": "^15.5.4",
+    "react": "^15.6.1",
+    "react-addons-test-utils": "^15.6.0",
+    "react-dom": "^15.6.1",
     "react-dragula": "^1.1.17",
     "shake.js": "^1.2.2"
   },
